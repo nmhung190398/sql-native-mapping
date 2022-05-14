@@ -1,11 +1,4 @@
-## Logging with Spring Boot and Elastic Stack  [![Twitter](https://img.shields.io/twitter/follow/piotr_minkowski.svg?style=social&logo=twitter&label=Follow%20Me)](https://twitter.com/piotr_minkowski)
-
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.piomin/logstash-logging-spring-boot-starter/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.piomin/logstash-logging-spring-boot-starter)
-[![CircleCI](https://circleci.com/gh/piomin/spring-boot-logging.svg?style=shield)](https://circleci.com/gh/piomin/spring-boot-logging)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=piomin_spring-boot-logging&metric=alert_status)](https://sonarcloud.io/dashboard?id=piomin_spring-boot-logging)
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=piomin_spring-boot-logging&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=piomin_spring-boot-logging)
-[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=piomin_spring-boot-logging&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=piomin_spring-boot-logging)
-
+## TupleMapping with Spring Boot
 ## Main purpose
 
 This library is mapping Tuple to java Object
