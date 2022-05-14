@@ -22,9 +22,9 @@ The library is published on Maven Central. Current version is  b  `1.0-SNAPSHOT`
 maven central - coming soon
 ```
 <dependency>
-  <groupId>com.github.hungnm</groupId>
+  <groupId>net.devnguyen</groupId>
   <artifactId>tuple-mapping-spring-boot-starter</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0.0</version>
 </dependency>
 ```
 coding
