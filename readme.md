@@ -17,9 +17,26 @@ Support mapping oracle,postgres,mysql
 4. sql Date => java.util.Date
 4. sql Text => String
 ## Getting started
-The library is published on Maven Central. Current version is  b  `1.0-SNAPSHOT`
+The library is published on Maven Central. Current version is  b  `1.0.0`
 
-maven central - coming soon
+step 1 : add profile to setting.xml (maven)
+```
+   <profile>
+      <id>github</id>
+      <repositories>
+        <repository>
+          <id>central</id>
+          <url>https://repo1.maven.org/maven2</url>
+        </repository>
+        <repository>
+          <id>github</id>
+          <name>GitHub nmhung190398 Apache Maven Packages</name>
+          <url>https://maven.pkg.github.com/nmhung190398/maven-package</url>
+        </repository>
+      </repositories>
+   </profile>
+```
+step 2: add dependency to pom.xml
 ```
 <dependency>
   <groupId>net.devnguyen</groupId>
@@ -27,7 +44,8 @@ maven central - coming soon
   <version>1.0.0</version>
 </dependency>
 ```
-coding
+
+coding\
 step 1. create Entity
 ```
 
