@@ -2,11 +2,27 @@
 ## Main purpose
 
 This library is mapping Tuple to java Object
+native sql to Object DTO
+
+## Example
+```
+   String sql = "select t.data as 'DATA', count(t.data) as 'COUNT' from tableName t " +
+        "group by t.int_data ";
+   List<GroupDTO> groupDTOS = TupleMapping.executeNativeQuery(entityManager, sql, GroupDTO.class);
+```
+```
+@NoArgsConstructor
+public class GroupDTO {
+    @TupleElementAlias(name = "DATA")
+    private Long data;
+    @TupleElementAlias(name = "COUNT")
+    private BigDecimal count;
+}
+```
+
 ## Articles
 
 Detailed description can be found here:
-1. [Logging with Spring Boot and Elastic Stack](https://piotrminkowski.com/2019/05/07/logging-with-spring-boot-and-elastic-stack/)
-2. [Using logstash-logging-spring-boot-starter for logging with Spring Boot and Logstash](https://piotrminkowski.com/2019/10/02/using-logstash-logging-spring-boot-starter-for-logging-with-spring-boot-and-logstash/)
 
 ## Features
 
