@@ -4,21 +4,26 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
 import java.util.*;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class ResultSetMapping {
 
     public static Map<Class<?>, FieldMap> classObjectClassMappingMap = new HashMap<>();
-
-    public static <T> List<T> map(ResultSet resultSet, Class<T> tClass) throws SQLException {
+    public static <T> List<T> map(ResultSet resultSet, Class<T> tClass) throws SQLException{
         List<T> result = new ArrayList<T>();
         Set<String> columnNames = getColumnNames(resultSet);
         while (resultSet.next()) {
-            result.add(map(resultSet, columnNames, tClass));
+            result.add(mapItem(resultSet, columnNames, tClass));
         }
         return result;
     }
 
-    private static <T> T map(ResultSet resultSet, Set<String> columnNames, Class<T> tClass) throws SQLException {
+    public static <T> List<T> map(SupplierSQLException<ResultSet> resultSetSupplier, Class<T> tClass) throws SQLException {
+        return map(resultSetSupplier.get(),tClass);
+    }
+
+    private static <T> T mapItem(ResultSet resultSet, Set<String> columnNames, Class<T> tClass) throws SQLException {
         Constructor<T> constructor = null;
         T object = null;
         try {
@@ -56,24 +61,6 @@ public class ResultSetMapping {
             columnNames.add(metaData.getColumnName(i));
         }
         return columnNames;
-    }
-
-    private static String DB_URL = "jdbc:mysql://localhost:3306/tuple-mapping";
-    private static String USER_NAME = "root";
-    private static String PASSWORD = "123456";
-
-    public static Connection getConnection(String dbURL, String userName,
-                                           String password) {
-        Connection conn = null;
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection(dbURL, userName, password);
-            System.out.println("connect successfully!");
-        } catch (Exception ex) {
-            System.out.println("connect failure!");
-            ex.printStackTrace();
-        }
-        return conn;
     }
 
 
