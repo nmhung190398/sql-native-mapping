@@ -1,8 +1,11 @@
 ## Java Sql Native Mapping (Hibernate,JDBC)
+
 ## Main purpose
 
 This library is mapping Tuple to java Object
+
 ## Example
+
 ```
 @NoArgsConstructor
 public class GroupDTO {
@@ -12,14 +15,17 @@ public class GroupDTO {
     private BigDecimal count;
 }
 ```
+
 1. Tuple Mapping
+
 ```
     //select with custom field name
     String sql = "select t.int_data as 'DATA', count(t.int_data) as 'COUNT' from hnm_test t group by t.int_data ";
-    List<GroupDTO> groupDTOS = TupleMapping.executeNativeQuery(entityManager, sql, GroupDTO.class);    
+    List<GroupDTO> groupDTOS = TupleMapping.executeNativeQuery(entityManager, sql, GroupDTO.class);
 ```
 
 2. Result Mapping
+
 ```
     Connection conn = getConnection(DB_URL, USER_NAME, PASSWORD);
     Statement stmt = conn.createStatement();
@@ -28,24 +34,31 @@ public class GroupDTO {
 
     List<GroupDTO> groupDTOS = ResultSetMapping.map(rs,TestDTO.class);
 ```
+
 ## Articles
 
 Detailed description can be found here:
 coming soon
+
 ## Features
+
 #### - Support mapping Tuple,ResultSet to Object
+
 #### - Support mapping oracle,postgres,mysql
 
 1. sql Number => Number, Primitive Data type (byte, short, double,float , int, long)
 2. sql Date => java.time.Instant, java.time.LocalDate, java.time.LocalDateTime, java.time.LocalTime
 3. sql Date => java.sql.Date, java.sql.Timestalm, java.sql.Time
 4. sql Date => java.util.Date
-4. sql Text => String
+5. sql Text => String
+
 ## Getting started
-The library is published on Maven Central. Current version is  b  `1.0-SNAPSHOT`
+
+The library is published on Maven Central. Current version is b `1.0.0`
 
 maven central - coming soon
 step 1 : add profile to setting.xml (maven)
+
 ```
    <profile>
       <id>github</id>
@@ -62,7 +75,9 @@ step 1 : add profile to setting.xml (maven)
       </repositories>
    </profile>
 ```
+
 step 2: add dependency to pom.xml
+
 ```
 <dependency>
   <groupId>com.github.hungnm</groupId>
@@ -73,6 +88,7 @@ step 2: add dependency to pom.xml
 
 coding
 step 1. create Entity
+
 ```
 
 @Entity
@@ -126,8 +142,10 @@ public class TestEntity {
 ```
 
 step 2: create DTO and using @TupleElementAlias with name same sql select
+
 1. TestDTO same field TestEntity
 2. GroupDTO group data
+
 ```
 @Data
 @NoArgsConstructor
@@ -186,7 +204,8 @@ public class GroupDTO {
     private BigDecimal count;
 }
 ```
-step 3 :  coding
+
+step 3 : coding
 
 ```
 //select with Consumer<Query>
