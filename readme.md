@@ -9,9 +9,9 @@ This library is mapping Tuple to java Object
 ```
 @NoArgsConstructor
 public class GroupDTO {
-    @TupleElementAlias(name = "DATA")
+    @FieldMapping(name = "DATA")
     private Long data;
-    @TupleElementAlias(name = "COUNT")
+    @FieldMapping(name = "COUNT")
     private BigDecimal count;
 }
 ```
@@ -141,7 +141,7 @@ public class TestEntity {
 }
 ```
 
-step 2: create DTO and using @TupleElementAlias with name same sql select
+step 2: create DTO and using @FieldMapping with name same sql select
 
 1. TestDTO same field TestEntity
 2. GroupDTO group data
@@ -151,46 +151,46 @@ step 2: create DTO and using @TupleElementAlias with name same sql select
 @NoArgsConstructor
 public class TestDTO {
 
-    @TupleElementAlias(name = "ID")
+    @FieldMapping(name = "ID")
     private Long id;
 
-    @TupleElementAlias(name = "STRING_DATA")
+    @FieldMapping(name = "STRING_DATA")
     private String stringData;
 
-    @TupleElementAlias(name = "BOOLEAN_DATA")
+    @FieldMapping(name = "BOOLEAN_DATA")
     private Boolean booleanData;
 
-    @TupleElementAlias(name = "BOOL_DATA")
+    @FieldMapping(name = "BOOL_DATA")
     private boolean boolData;
 
-    @TupleElementAlias(name = "INTEGER_DATA")
+    @FieldMapping(name = "INTEGER_DATA")
     private Integer integerData;
 
-    @TupleElementAlias(name = "INT_DATA")
+    @FieldMapping(name = "INT_DATA")
     private int intData;
 
-    @TupleElementAlias(name = "DATE_UTIL_DATA")
+    @FieldMapping(name = "DATE_UTIL_DATA")
     private java.util.Date dateUtilData;
 
-    @TupleElementAlias(name = "DATE_SQL_DATA")
+    @FieldMapping(name = "DATE_SQL_DATA")
     private java.sql.Date dateSqlData;
 
-    @TupleElementAlias(name = "TIMESTAMP_DATA")
+    @FieldMapping(name = "TIMESTAMP_DATA")
     private java.sql.Timestamp timestampData;
 
-    @TupleElementAlias(name = "TIME_DATA")
+    @FieldMapping(name = "TIME_DATA")
     private java.sql.Time timeData;
 
-    @TupleElementAlias(name = "INSTANT_DATA")
+    @FieldMapping(name = "INSTANT_DATA")
     private java.time.Instant instantData;
 
-    @TupleElementAlias(name = "LOCAL_DATE_DATA")
+    @FieldMapping(name = "LOCAL_DATE_DATA")
     private java.time.LocalDate localDateData;
 
-    @TupleElementAlias(name = "LOCAL_DATE_TIME_DATA")
+    @FieldMapping(name = "LOCAL_DATE_TIME_DATA")
     private java.time.LocalDateTime localDateTimeData;
 
-    @TupleElementAlias(name = "LOCAL_TIME_DATA")
+    @FieldMapping(name = "LOCAL_TIME_DATA")
     private java.time.LocalTime localTimeData;
 }
 ```
@@ -198,9 +198,9 @@ public class TestDTO {
 ```
 @NoArgsConstructor
 public class GroupDTO {
-    @TupleElementAlias(name = "DATA")
+    @FieldMapping(name = "DATA")
     private Long data;
-    @TupleElementAlias(name = "COUNT")
+    @FieldMapping(name = "COUNT")
     private BigDecimal count;
 }
 ```
