@@ -99,8 +99,8 @@ public class ParseUtils {
 
 
         instantMap.put(LocalDateTime.class, x -> functionOrDefault(x, a -> LocalDateTime.ofInstant(a,ZoneId.systemDefault()), null));
-        instantMap.put(LocalDate.class, x -> functionOrDefault(x, a -> LocalDate.ofInstant(a,ZoneId.systemDefault()), null));
-        instantMap.put(LocalTime.class, x -> functionOrDefault(x, a -> LocalTime.ofInstant(a,ZoneId.systemDefault()), null));
+        instantMap.put(LocalDate.class, x -> functionOrDefault(x, a -> LocalDateTime.ofInstant(a,ZoneId.systemDefault()).toLocalDate(), null));
+        instantMap.put(LocalTime.class, x -> functionOrDefault(x, a -> LocalDateTime.ofInstant(a,ZoneId.systemDefault()).toLocalTime(), null));
 
         instantMap.put(java.sql.Date.class, x -> functionOrDefault(x, a ->new java.sql.Date(java.util.Date.from(a).getTime()), null));
         instantMap.put(java.sql.Timestamp.class, x -> functionOrDefault(x, a -> new Timestamp(java.util.Date.from(a).getTime()), null));
