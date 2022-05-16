@@ -1,4 +1,4 @@
-package net.devnguyen.tuplemapping;
+package net.devnguyen.sqlnativemapping;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -39,13 +39,13 @@ public class FieldMap extends HashMap<String, FiledMapItem> {
         Field[] fields = type.getDeclaredFields();
         Set<String> checkDuplicateAlias = new HashSet<>();
         for (Field field : fields) {
-            if(!field.isAnnotationPresent(TupleElementAlias.class)){
+            if(!field.isAnnotationPresent(FieldMapping.class)){
                 return;
             }
             TupleElementAliasAttribute tupleElementAliasAttribute = new TupleElementAliasAttribute(field);
 
             if (checkDuplicateAlias.contains(tupleElementAliasAttribute.getName())) {
-                throw new TupleMappingException("Duplicate alias name : " + tupleElementAliasAttribute.getName() + " " + type.getName());
+                throw new SqlNativeMappingException("Duplicate alias name : " + tupleElementAliasAttribute.getName() + " " + type.getName());
             }
             checkDuplicateAlias.add(tupleElementAliasAttribute.getName());
             field.setAccessible(true);
@@ -53,27 +53,27 @@ public class FieldMap extends HashMap<String, FiledMapItem> {
 
         }
         if (this.isEmpty()) {
-            throw new TupleMappingException("Cannot find TupleElementAlias annotation in " + type.getName());
+            throw new SqlNativeMappingException("Cannot find TupleElementAlias annotation in " + type.getName());
         }
     }
 
     public static class TupleElementAliasAttribute{
         private Field field;
-        private TupleElementAlias tupleElementAlias;
+        private FieldMapping fieldMapping;
         private String name;
 
 
         public TupleElementAliasAttribute(Field field) {
             this.field = field;
-            this.tupleElementAlias = field.getDeclaredAnnotation(TupleElementAlias.class);
+            this.fieldMapping = field.getDeclaredAnnotation(FieldMapping.class);
             detectAttribute();
         }
 
         private void detectAttribute() {
-            if(StringUtils.isBlank(tupleElementAlias.name())){
-                throw new TupleMappingException("TupleElementAlias name is not blank");
+            if(StringUtils.isBlank(fieldMapping.name())){
+                throw new SqlNativeMappingException("TupleElementAlias name is not blank");
             }else{
-                this.name = tupleElementAlias.name().toUpperCase();
+                this.name = fieldMapping.name().toUpperCase();
             }
         }
 

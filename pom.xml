@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>net.devnguyen</groupId>
-    <artifactId>tuple-mapping-spring-boot-starter</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>sql-native-mapping</artifactId>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
     <developers>
         <developer>
@@ -18,10 +18,10 @@
 
 
     <scm>
-        <connection>scm:git:git://github.com/nmhung190398/tuple-mapping-spring-boot-starter.git</connection>
-        <developerConnection>scm:git:https://github.com/ManjunathPrabhakar/github-example-package.git</developerConnection>
-        <url>https://github.com/nmhung190398/tuple-mapping-spring-boot-starter</url>
-        <tag>tuple-mapping-spring-boot-starter</tag>
+        <connection>scm:git:git://github.com/nmhung190398/sql-native-mapping.git</connection>
+        <developerConnection>scm:git:https://github.com/hungnm/sql-native-mapping.git</developerConnection>
+        <url>https://github.com/nmhung190398/sql-native-mapping</url>
+        <tag>sql-native-mapping</tag>
     </scm>
 
 
@@ -49,8 +49,8 @@
     <distributionManagement>
         <repository>
             <id>github</id>
-            <name>tuple-mapping-spring-boot-starter</name>
-            <url>https://github.com/nmhung190398/tuple-mapping-spring-boot-starter</url>
+            <name>sql-native-mapping</name>
+            <url>https://maven.pkg.github.com/nmhung190398/maven-package</url>
         </repository>
     </distributionManagement>
 

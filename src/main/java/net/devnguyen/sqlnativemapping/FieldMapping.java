@@ -1,4 +1,4 @@
-package net.devnguyen.tuplemapping;
+package net.devnguyen.sqlnativemapping;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,6 +7,6 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface TupleElementAlias {
+public @interface FieldMapping {
     String name() default "";
 }
