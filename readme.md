@@ -1,16 +1,41 @@
-## TupleMapping with Spring Boot
+## Java Sql Native Mapping (Hibernate,JDBC)
 ## Main purpose
 
 This library is mapping Tuple to java Object
+## Example
+```
+@NoArgsConstructor
+public class GroupDTO {
+    @TupleElementAlias(name = "DATA")
+    private Long data;
+    @TupleElementAlias(name = "COUNT")
+    private BigDecimal count;
+}
+```
+1. Tuple Mapping
+```
+    //select with custom field name
+    String sql = "select t.int_data as 'DATA', count(t.int_data) as 'COUNT' from hnm_test t group by t.int_data ";
+    List<GroupDTO> groupDTOS = TupleMapping.executeNativeQuery(entityManager, sql, GroupDTO.class);    
+```
+
+2. Result Mapping
+```
+    Connection conn = getConnection(DB_URL, USER_NAME, PASSWORD);
+    Statement stmt = conn.createStatement();
+    String sql = "select t.int_data as 'DATA', count(t.int_data) as 'COUNT' from hnm_test t group by t.int_data ";
+    ResultSet rs = stmt.executeQuery(sql);
+
+    List<GroupDTO> groupDTOS = ResultSetMapping.map(rs,TestDTO.class);
+```
 ## Articles
 
 Detailed description can be found here:
-1. [Logging with Spring Boot and Elastic Stack](https://piotrminkowski.com/2019/05/07/logging-with-spring-boot-and-elastic-stack/)
-2. [Using logstash-logging-spring-boot-starter for logging with Spring Boot and Logstash](https://piotrminkowski.com/2019/10/02/using-logstash-logging-spring-boot-starter-for-logging-with-spring-boot-and-logstash/)
-
+coming soon
 ## Features
+#### - Support mapping Tuple,ResultSet to Object
+#### - Support mapping oracle,postgres,mysql
 
-Support mapping oracle,postgres,mysql
 1. sql Number => Number, Primitive Data type (byte, short, double,float , int, long)
 2. sql Date => java.time.Instant, java.time.LocalDate, java.time.LocalDateTime, java.time.LocalTime
 3. sql Date => java.sql.Date, java.sql.Timestalm, java.sql.Time
@@ -20,13 +45,32 @@ Support mapping oracle,postgres,mysql
 The library is published on Maven Central. Current version is  b  `1.0-SNAPSHOT`
 
 maven central - coming soon
+step 1 : add profile to setting.xml (maven)
+```
+   <profile>
+      <id>github</id>
+      <repositories>
+        <repository>
+          <id>central</id>
+          <url>https://repo1.maven.org/maven2</url>
+        </repository>
+        <repository>
+          <id>github</id>
+          <name>GitHub nmhung190398 Apache Maven Packages</name>
+          <url>https://maven.pkg.github.com/nmhung190398/maven-package</url>
+        </repository>
+      </repositories>
+   </profile>
+```
+step 2: add dependency to pom.xml
 ```
 <dependency>
   <groupId>com.github.hungnm</groupId>
-  <artifactId>tuple-mapping-spring-boot-starter</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <artifactId>sql-native-mapping</artifactId>
+  <version>1.0.0</version>
 </dependency>
 ```
+
 coding
 step 1. create Entity
 ```
