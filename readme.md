@@ -1,41 +1,64 @@
-## TupleMapping with Spring Boot
+## Java Sql Native Mapping (Hibernate,JDBC)
+
 ## Main purpose
 
 This library is mapping Tuple to java Object
-native sql to Object DTO
 
 ## Example
-```
-   String sql = "select t.data as 'DATA', count(t.data) as 'COUNT' from tableName t " +
-        "group by t.int_data ";
-   List<GroupDTO> groupDTOS = TupleMapping.executeNativeQuery(entityManager, sql, GroupDTO.class);
-```
+
 ```
 @NoArgsConstructor
 public class GroupDTO {
-    @TupleElementAlias(name = "DATA")
+    @FieldMapping(name = "DATA")
     private Long data;
-    @TupleElementAlias(name = "COUNT")
+    @FieldMapping(name = "COUNT")
     private BigDecimal count;
 }
+```
+
+1. Tuple Mapping
+
+```
+    //select with custom field name
+    String sql = "select t.int_data as 'DATA', count(t.int_data) as 'COUNT' from hnm_test t group by t.int_data ";
+    List<GroupDTO> groupDTOS = TupleMapping.executeNativeQuery(entityManager, sql, GroupDTO.class);
+```
+
+2. Result Mapping
+
+```
+    Connection conn = getConnection(DB_URL, USER_NAME, PASSWORD);
+    Statement stmt = conn.createStatement();
+    String sql = "select t.int_data as 'DATA', count(t.int_data) as 'COUNT' from hnm_test t group by t.int_data ";
+    ResultSet rs = stmt.executeQuery(sql);
+
+    List<GroupDTO> groupDTOS = ResultSetMapping.map(rs,TestDTO.class);
 ```
 
 ## Articles
 
 Detailed description can be found here:
+coming soon
 
 ## Features
 
-Support mapping oracle,postgres,mysql
+#### - Support mapping Tuple,ResultSet to Object
+
+#### - Support mapping oracle,postgres,mysql
+
 1. sql Number => Number, Primitive Data type (byte, short, double,float , int, long)
 2. sql Date => java.time.Instant, java.time.LocalDate, java.time.LocalDateTime, java.time.LocalTime
 3. sql Date => java.sql.Date, java.sql.Timestalm, java.sql.Time
 4. sql Date => java.util.Date
-4. sql Text => String
-## Getting started
-The library is published on Maven Central. Current version is  b  `1.0.0`
+5. sql Text => String
 
+## Getting started
+
+The library is published on Maven Central. Current version is b `1.0.0`
+
+maven central - coming soon
 step 1 : add profile to setting.xml (maven)
+
 ```
    <profile>
       <id>github</id>
@@ -52,17 +75,20 @@ step 1 : add profile to setting.xml (maven)
       </repositories>
    </profile>
 ```
+
 step 2: add dependency to pom.xml
+
 ```
 <dependency>
-  <groupId>net.devnguyen</groupId>
-  <artifactId>tuple-mapping-spring-boot-starter</artifactId>
+  <groupId>com.github.hungnm</groupId>
+  <artifactId>sql-native-mapping</artifactId>
   <version>1.0.0</version>
 </dependency>
 ```
 
-coding\
+coding
 step 1. create Entity
+
 ```
 
 @Entity
@@ -115,54 +141,56 @@ public class TestEntity {
 }
 ```
 
-step 2: create DTO and using @TupleElementAlias with name same sql select
+step 2: create DTO and using @FieldMapping with name same sql select
+
 1. TestDTO same field TestEntity
 2. GroupDTO group data
+
 ```
 @Data
 @NoArgsConstructor
 public class TestDTO {
 
-    @TupleElementAlias(name = "ID")
+    @FieldMapping(name = "ID")
     private Long id;
 
-    @TupleElementAlias(name = "STRING_DATA")
+    @FieldMapping(name = "STRING_DATA")
     private String stringData;
 
-    @TupleElementAlias(name = "BOOLEAN_DATA")
+    @FieldMapping(name = "BOOLEAN_DATA")
     private Boolean booleanData;
 
-    @TupleElementAlias(name = "BOOL_DATA")
+    @FieldMapping(name = "BOOL_DATA")
     private boolean boolData;
 
-    @TupleElementAlias(name = "INTEGER_DATA")
+    @FieldMapping(name = "INTEGER_DATA")
     private Integer integerData;
 
-    @TupleElementAlias(name = "INT_DATA")
+    @FieldMapping(name = "INT_DATA")
     private int intData;
 
-    @TupleElementAlias(name = "DATE_UTIL_DATA")
+    @FieldMapping(name = "DATE_UTIL_DATA")
     private java.util.Date dateUtilData;
 
-    @TupleElementAlias(name = "DATE_SQL_DATA")
+    @FieldMapping(name = "DATE_SQL_DATA")
     private java.sql.Date dateSqlData;
 
-    @TupleElementAlias(name = "TIMESTAMP_DATA")
+    @FieldMapping(name = "TIMESTAMP_DATA")
     private java.sql.Timestamp timestampData;
 
-    @TupleElementAlias(name = "TIME_DATA")
+    @FieldMapping(name = "TIME_DATA")
     private java.sql.Time timeData;
 
-    @TupleElementAlias(name = "INSTANT_DATA")
+    @FieldMapping(name = "INSTANT_DATA")
     private java.time.Instant instantData;
 
-    @TupleElementAlias(name = "LOCAL_DATE_DATA")
+    @FieldMapping(name = "LOCAL_DATE_DATA")
     private java.time.LocalDate localDateData;
 
-    @TupleElementAlias(name = "LOCAL_DATE_TIME_DATA")
+    @FieldMapping(name = "LOCAL_DATE_TIME_DATA")
     private java.time.LocalDateTime localDateTimeData;
 
-    @TupleElementAlias(name = "LOCAL_TIME_DATA")
+    @FieldMapping(name = "LOCAL_TIME_DATA")
     private java.time.LocalTime localTimeData;
 }
 ```
@@ -170,13 +198,14 @@ public class TestDTO {
 ```
 @NoArgsConstructor
 public class GroupDTO {
-    @TupleElementAlias(name = "DATA")
+    @FieldMapping(name = "DATA")
     private Long data;
-    @TupleElementAlias(name = "COUNT")
+    @FieldMapping(name = "COUNT")
     private BigDecimal count;
 }
 ```
-step 3 :  coding
+
+step 3 : coding
 
 ```
 //select with Consumer<Query>

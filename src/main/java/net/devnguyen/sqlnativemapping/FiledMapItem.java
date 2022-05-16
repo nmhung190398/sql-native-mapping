@@ -1,4 +1,4 @@
-package net.devnguyen.tuplemapping;
+package net.devnguyen.sqlnativemapping;
 
 import java.lang.reflect.Field;
 
@@ -34,18 +34,23 @@ public class FiledMapItem {
         if (ParseUtils.isNumberPrimitiveData(field.getType()) && Number.class.isAssignableFrom(vClass)) {
             return ParseUtils.parseNumber((Number) value, field.getType());
         }
-        if (java.util.Date.class.isAssignableFrom(field.getType()) && java.util.Date.class.isAssignableFrom(vClass)) {
+
+        //target is java.sql.* or java.util.Date
+        if ( ParseUtils.isDateOrJava8Date(field.getType()) && java.util.Date.class.isAssignableFrom(vClass)) {
             return ParseUtils.parseDate((java.util.Date) value, field.getType());
         }
-        if (ParseUtils.isJava8Date(field.getType()) && java.util.Date.class.isAssignableFrom(vClass)) {
-            return ParseUtils.parseDate((java.util.Date) value, field.getType());
+
+        //target is java 8 date
+        if ( ParseUtils.isDateOrJava8Date(field.getType()) && ParseUtils.isJava8Date(vClass)) {
+            return ParseUtils.parseDateJava8(value, field.getType());
         }
+
         if (String.class.isAssignableFrom(field.getType())) {
             return value != null ? value.toString() : null;
         }
         if(vClass.equals(Boolean.class) && field.getType().equals(boolean.class)){
             return value == null ? Boolean.FALSE : value;
         }
-        throw new TupleMappingException(this.field + "  cannot parse " + vClass.getName() + " to " + field.getType().getName());
+        throw new SqlNativeMappingException(this.field + "  cannot parse " + vClass.getName() + " to " + field.getType().getName());
     }
 }

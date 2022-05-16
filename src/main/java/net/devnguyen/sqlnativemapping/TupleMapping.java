@@ -1,4 +1,4 @@
-package net.devnguyen.tuplemapping;
+package net.devnguyen.sqlnativemapping;
 
 import javax.persistence.*;
 import java.lang.reflect.Constructor;
