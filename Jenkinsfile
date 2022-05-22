@@ -11,10 +11,10 @@ node {
     }
 
     stage('clean') {
-        bat "mvnw clean"
+        bat "mvn clean"
     }
 
     stage('deploy') {
-        bat "mvnw deploy -Pprod -DskipTests"
+        bat "mvn deploy -Pprod -DskipTests"
     }
 }
