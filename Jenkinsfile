@@ -6,15 +6,15 @@ node {
     }
 
     stage('check java') {
-        sh "java -version"
+        bat "dir"
+        bat "java -version"
     }
 
     stage('clean') {
-        sh "chmod +x mvnw"
-        sh "./mvnw clean"
+        bat "mvnw clean"
     }
 
     stage('deploy') {
-        sh "./mvnw deploy -Pprod -DskipTests"
+        bat "mvnw deploy -Pprod -DskipTests"
     }
 }
